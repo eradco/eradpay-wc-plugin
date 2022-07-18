@@ -1,0 +1,89 @@
+body.eradpay-modal-open {
+    overflow: hidden;
+}
+.eradpay-modal-fader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 99998;
+    background: rgba(0,0,0,0.7);
+}
+.eradpay-modal-fader.active {
+    display: block;
+}
+.eradpay-modal-window {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 48%;
+    height: 46%;
+    min-width: 340px;
+    min-height: 600px;
+    z-index: 99999;
+    background: #fff;
+    border-radius: 5px;
+}
+.eradpay-modal-window.active {
+    display: block;
+}
+.eradpay-modal-window__content {
+    width: 100%;
+    height: 100%;
+}
+.eradpay-modal-window__content-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 6px;
+}
+.eradpay-modal-window__close-control {
+    position: absolute;
+    right: 11px;
+    top: 13px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer
+}
+.eradpay-modal-window__close-control:hover {
+    opacity: 0.9;
+}
+.eradpay-btn {
+    opacity: 1;
+    box-sizing: border-box;
+    border-radius: 28px;
+    font-weight: normal;
+    font-size: 15px;
+    font-family: sans-serif;
+    outline: none !important;
+}
+.eradpay-btn:not(:last-child) {
+    margin-right: 22px;
+}
+.eradpay-btn__submit {
+    background: #05f1d8;
+    border: 1px solid #05f1d8;
+}
+.eradpay-btn__submit:hover,
+.eradpay-btn__submit:active {
+    background: #82f8ec;
+    border: 1px solid #05f1d8;
+    /*opacity: 0.8;*/
+}
+.eradpay-btn__cancel {
+    background: none;
+    border: 1px solid #FF5B5F;
+    color: #FF5B5F;
+}
+.eradpay-btn__cancel:hover {
+    color: #062f41;
+    background: #FF5B5F;
+    border: 1px solid #FF5B5F;
+}

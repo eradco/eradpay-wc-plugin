@@ -14,6 +14,10 @@ if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+if (! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' )))) {
+    return;
+}
+
 define('ERADPAY_PLUGIN_PATH', plugin_dir_url(__FILE__));
 
 function woocommerce_eradpay_init() {
@@ -32,4 +36,3 @@ function woocommerce_eradpay_init() {
 
 # Plugin initialization
 add_action('plugins_loaded', 'woocommerce_eradpay_init', 0);
-
