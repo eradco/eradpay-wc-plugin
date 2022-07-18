@@ -13,8 +13,11 @@ if (! class_exists('WC_Payment_Gateway')) {
 class WC_eradPay_Gateway extends WC_Payment_Gateway
 {
     const SESSION_KEY = 'eradpay_wc_order_id';
-    const ERADPAY_ORDER_ID = 'razorpay_order_id';
+    const ERADPAY_ORDER_ID = 'eradpay_order_id';
     const ERADPAY_TRANSACTION_ID_TOKEN = 'eradpay_transaction_id';
+
+    const ERAPDAY_MODE_SANDBOX = 'sandbox';
+    const ERAPDAY_MODE_LIVE = 'live';
 
     const SUPPORTED_CURRENCIES_LIST = [
         'USD',
@@ -195,6 +198,9 @@ class WC_eradPay_Gateway extends WC_Payment_Gateway
             'name' => html_entity_decode(get_bloginfo('name'), ENT_QUOTES),
             'amount' => $order->get_total(),
             'currency' => $order->get_currency(),
+            'mode' => $this->get_option('sandbox_mode') === 'yes' ?
+                self::ERAPDAY_MODE_SANDBOX:
+                self::ERAPDAY_MODE_LIVE,
             'description' => "Order $order_id",
             'order_id' => $order->get_id(),
             'cancel_url' => wc_get_checkout_url(),
@@ -336,14 +342,13 @@ EOT;
         // @TODO fix this dirty hack
         $transaction_post_json = file_get_contents('php://input');
         try {
-            $transaction_post = json_decode($transaction_post_json, true);
+            $transaction_post_data = json_decode($transaction_post_json, true);
         } catch (Exception $e) {
-            $transaction_post = [];
+            $transaction_post_data = [];
         }
-        $transaction_post_data = ! empty($transaction_post['data']) ? $transaction_post['data']: [];
-        $transaction_id = ! empty($transaction_post_data) ? $transaction_post_data['transaction']['id']: null;
-        $transaction_payment_id = ! empty($transaction_post_data) ? $transaction_post_data['transaction']['custom_fields']['payment_id']: null;
-        $transaction_successful = $transaction_post && $transaction_post['type'] == 'transaction.successful';
+        $transaction_id = ! empty($transaction_post_data) ? $transaction_post_data['id']: null;
+        $transaction_payment_id = ! empty($transaction_post_data) ? $transaction_post_data['payment_id']: null;
+        $transaction_successful = $transaction_post_data && $transaction_post_data['status'] == 'SUCCESSFUL';
 
         $transaction_id = sanitize_text_field($transaction_id);
         $transaction_payment_id = sanitize_text_field($transaction_payment_id);

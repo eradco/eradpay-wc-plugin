@@ -58,6 +58,7 @@ body.eradpay-modal-open {
 .eradpay-btn {
     opacity: 1;
     box-sizing: border-box;
+    padding: 0.6180469716em 1.41575em;
     border-radius: 28px;
     font-weight: normal;
     font-size: 15px;
