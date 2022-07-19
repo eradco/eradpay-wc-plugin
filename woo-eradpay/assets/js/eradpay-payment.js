@@ -1,9 +1,9 @@
 (() => {
-    document.addEventListener("DOMContentLoaded", () => {
-        const API_BASE_URL = 'https://app.erad.co/eradpay';
+    document.addEventListener('DOMContentLoaded', () => {
         const data = eradpay_wc_payment_vars;
-        const cancelUrl = data.cancel_url;
-        const callbackUrl = data.callback_url;
+        const api_base_url = data.api_base_url;
+        const cancel_url = data.cancel_url;
+        const webhook_url = data.callback_url;
         const token = data.token;
         const amount = data.amount;
         const currency = data.currency.toLowerCase();
@@ -38,9 +38,9 @@
                 payment_id,
                 mode: data.mode,
                 platform: 'wc',
-                webhook_url: callbackUrl,
+                webhook_url,
             }).toString();
-            const iframeUrl = `${API_BASE_URL}?${queryStr}`;
+            const iframeUrl = `${api_base_url}?${queryStr}`;
             const $iframe = document.createElement('iframe');
             $iframe.src = iframeUrl;
             $iframe.className = cssClasses.modalWindowContentIframe;
@@ -80,7 +80,7 @@
 
         const onCancelHandler = (e) => {
             e.preventDefault();
-            window.location.href = cancelUrl;
+            window.location.href = cancel_url;
         };
 
         const $submitBtn = document.querySelector(cssSelectors.btnSubmit);

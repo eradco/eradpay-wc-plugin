@@ -25,7 +25,8 @@ function woocommerce_eradpay_init() {
         return;
     }
 
-    require_once __DIR__.'/includes/class-wc-eradpay-gateway.php';
+    require_once __DIR__.'/includes/wc-eradpay-gateway.php';
+    require_once __DIR__.'/includes/wc-eradpay-api.php';
 
     # Generate plugin links
     add_filter('plugin_action_links_' . plugin_basename(__FILE__), [WC_eradPay_Gateway::class, 'add_plugin_links']);
