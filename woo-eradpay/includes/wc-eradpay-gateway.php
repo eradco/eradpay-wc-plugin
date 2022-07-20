@@ -203,6 +203,12 @@ class WC_eradPay_Gateway extends WC_Payment_Gateway
                 self::ERAPDAY_MODE_LIVE,
             'description' => "Order $order_id",
             'order_id' => $order->get_id(),
+            'billing_data' => [
+                'first_name' => $order->get_billing_first_name(),
+                'last_name' => $order->get_billing_last_name(),
+                'phone' => $order->get_billing_phone(),
+                'email' => $order->get_billing_email(),
+            ],
             'cancel_url' => wc_get_checkout_url(),
             'callback_url' => add_query_arg([
                 'wc-api' => $this->id,

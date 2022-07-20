@@ -8,6 +8,7 @@
         const amount = data.amount;
         const currency = data.currency.toLowerCase();
         const payment_id = data.order_id;
+        const billing_data = data.billing_data;
 
         const cssClasses = {
             bodyModalOpened: 'eradpay-modal-open',
@@ -36,6 +37,10 @@
                 amount,
                 currency,
                 payment_id,
+                fn: billing_data.first_name,
+                ln: billing_data.last_name,
+                pn: billing_data.phone,
+                m: billing_data.email,
                 mode: data.mode,
                 platform: 'wc',
                 webhook_url,
