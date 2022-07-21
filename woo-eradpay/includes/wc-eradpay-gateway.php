@@ -344,8 +344,8 @@ EOT;
         $order_id = wc_get_order_id_by_order_key($order_key);
         $order = wc_get_order($order_id);
 
-        if ($order->needs_payment()) {
-            $success = $transaction_id && $status == 'SUCCESSFUL' && $order_id == $payment_id;
+        if ($order->needs_payment() && $transaction_id && $order_id == $payment_id) {
+            $success = $status == 'SUCCESSFUL';
             $this->update_order($order, $success, $transaction_id);
         }
 
@@ -369,7 +369,7 @@ EOT;
 
             $order->update_meta_data('eradpay_transaction_id', $transaction_id);
             $order->payment_complete($transaction_id);
-            $order->add_order_note("eradPay payment successful <br/>eradPay transaction_id: $transaction_id");
+            $order_note = "eradPay payment successful <br/>eradPay transaction_id: $transaction_id";
 
             if (isset($woocommerce->cart) === true) {
                 $woocommerce->cart->empty_cart();
@@ -379,8 +379,10 @@ EOT;
             $class = 'error';
             $order->add_order_note("Transaction Failed: $error<br/>eradPay transaction_id: $transaction_id");
             $order->update_status('failed');
+            $order_note = "Transaction Failed: $error<br/>eradPay transaction_id: $transaction_id";
         }
 
+        $order->add_order_note($order_note);
         $this->add_notice($msg, $class);
     }
 
