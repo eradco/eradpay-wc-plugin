@@ -46,6 +46,7 @@
                 mode: data.mode,
                 platform: 'wc',
                 webhook_url,
+                redirect_url: webhook_url,
                 card_form_only,
             }).toString();
 
