@@ -342,12 +342,12 @@ EOT;
         $transaction_id = sanitize_text_field($_GET['transaction_id']);
         $status = sanitize_text_field($_GET['status']);
         $order_key = sanitize_text_field($_GET['order_key']);
-        $payment_id = sanitize_text_field($_GET['payment_id']);
+        $merchant_id = sanitize_text_field($_GET['merchant_id']);
         $order_id = wc_get_order_id_by_order_key($order_key);
         $order = wc_get_order($order_id);
 
-        if ($order->needs_payment() && $transaction_id && $order_id == $payment_id) {
-            $success = $status == 'SUCCESSFUL';
+        if ($order->needs_payment() && $transaction_id && $order_id == $merchant_id) {
+            $success = $status == 'Successful';
             $this->update_order($order, $success, $transaction_id);
         }
 
