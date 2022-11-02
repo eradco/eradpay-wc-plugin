@@ -164,13 +164,14 @@ class WC_eradPay_Gateway extends WC_Payment_Gateway
                 'description' => __('Tick to run sandbox transaction on the eradPay gateway'),
                 'desc_tip' => true,
             ],
-//            'redirect_page_id' => [
-//                'title' => __('Return Page'),
-//                'type' => 'select',
-//                'options' => $this->get_redirect_pages_list('Select Page'),
-//                'description' => __('URL of success page'),
-//                'desc_tip' => true
-//            ]
+            'card_form_only' => [
+                'title' => __('Display'),
+                'type' => 'checkbox',
+                'label' => __('Display the credit card form only.'),
+                'default' => 'yes',
+                'description' => __('Tick to display only the credit card form, without the billing and order details'),
+                'desc_tip' => true,
+            ],
         ];
     }
 
@@ -201,6 +202,7 @@ class WC_eradPay_Gateway extends WC_Payment_Gateway
             'mode' => $this->get_option('sandbox_mode') === 'yes' ?
                 self::ERAPDAY_MODE_SANDBOX:
                 self::ERAPDAY_MODE_LIVE,
+            'card_form_only' => ($this->get_option('card_form_only') === 'yes') ? 1 : 0,
             'description' => "Order $order_id",
             'order_id' => $order->get_id(),
             'billing_data' => [
