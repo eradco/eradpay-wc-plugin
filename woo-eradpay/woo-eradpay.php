@@ -3,7 +3,7 @@
  * Plugin Name: eradPay for WooCommerce
  * Plugin URI: https://erad.co/
  * Description: eradPay payment gateway integration for WooCommerce version 2.0.0 or greater version.
- * Version: 1.0.0
+ * Version: 1.3.0
  * Author: Team erad
  * Author URI: https://erad.co/
  * Requires at least: 5.6

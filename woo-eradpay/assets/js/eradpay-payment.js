@@ -6,6 +6,7 @@
         const webhook_url = data.callback_url;
         const token = data.token;
         const amount = data.amount;
+        const card_form_only = data.card_form_only;
         const currency = data.currency.toLowerCase();
         const payment_id = data.order_id;
         const billing_data = data.billing_data;
@@ -33,18 +34,21 @@
             $modal.className += " active";
 
             const queryStr = new URLSearchParams({
-                token,
-                amount,
-                currency,
-                payment_id,
-                fn: billing_data.first_name,
-                ln: billing_data.last_name,
-                pn: billing_data.phone,
-                m: billing_data.email,
+                t: token,
+                am: amount,
+                cu: currency,
+                pa_id: payment_id,
+                fn: billing_data.first_name+" "+billing_data.last_name,
+                ph_n: billing_data.phone,
+                ph_c: "ae",
+                ph_c_d: "971",
+                em: billing_data.email,
                 mode: data.mode,
                 platform: 'wc',
                 webhook_url,
+                card_form_only,
             }).toString();
+
             const iframeUrl = `${api_base_url}?${queryStr}`;
             const $iframe = document.createElement('iframe');
             $iframe.src = iframeUrl;
