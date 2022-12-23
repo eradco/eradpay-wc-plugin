@@ -41,7 +41,7 @@
                 fn: billing_data.first_name+" "+billing_data.last_name,
                 ph_n: billing_data.phone,
                 ph_c: "ae",
-                ph_c_d: "971",
+                ph_c_d: "",
                 em: billing_data.email,
                 mode: data.mode,
                 platform: 'wc',
